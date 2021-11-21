@@ -2,9 +2,14 @@ import os
 from pathlib import Path
 import environ
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api',
     'rest_framework',
 ]
 
@@ -72,17 +78,18 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.sqlite3',
-        'NAME' : 'db.sqlite3',
-#            'ENGINE': 'django.db.backends.postgresql',
-#            'NAME': os.environ.get('DB_NAME'),
-#            'USER': os.environ.get('POSTGRES_USER'),
-#            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-#            'HOST': os.environ.get('DB_HOST'),
-#            'PORT': os.environ.get('DB_PORT'),
-        }
+#        'ENGINE':'django.db.backends.sqlite3',
+#        'NAME' : 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+    }
 }
 
 
