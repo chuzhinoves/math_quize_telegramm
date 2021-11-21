@@ -10,7 +10,7 @@ class Student(models.Model):
 class Quiz(models.Model):
     quiz_name = models.CharField(max_length=32)
     create_date = models.DateTimeField(auto_now=True)
-    questions = models.ImageField()
+    task_img = models.ImageField(blank=True)
 
 
 class Question(models.Model):

@@ -9,7 +9,7 @@ services:
       - postgres-data:/var/lib/postgresql/data/
       - /var/log/postgresql/:/var/log/postgresql/
     env_file:
-      - .env
+      - math_quiz/.env
   web:
     image: chuzhinoves/math_quiz:latest
     volumes:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env 
+      - math_quiz/.env 
   nginx:
     image: nginx
     volumes:
